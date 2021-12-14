@@ -21,8 +21,13 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 |
 */
 
+Route::get('/', function () {
+    return view('owner.welcome');
+});
+
+
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('owner.dashboard');
 })->middleware(['auth:owners'])->name('dashboard');
 
 Route::get('/component-test1', [ComponentTestController::class, 'showComponent1']);

@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Auth;
 class RedirectIfAuthenticated
 {
     private const GUARD_USER = 'users';
-    private const GUARD_OWNER = 'oners';
-    private const GUARD_ADMIN = 'admins';
+    private const GUARD_OWNER = 'owners';
+    private const GUARD_ADMIN = 'admin';
     /**
      * Handle an incoming request.
      *
@@ -22,7 +22,7 @@ class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next, ...$guards)
     {
-        // $guards = empty($guards) ? [null] : $guards;
+        $guards = empty($guards) ? [null] : $guards;
 
         // foreach ($guards as $guard) {
         //     if (Auth::guard($guard)->check()) {
