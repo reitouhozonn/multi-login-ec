@@ -31,10 +31,10 @@ Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->middleware(['auth:admin'])->name('dashboard');
 
-Route::get('/component-test1', [ComponentTestController::class, 'showComponent1']);
-Route::get('/component-test2', [ComponentTestController::class, 'showComponent2']);
-Route::get('/servicecontainertest', [LifeCycleTestController::class, 'showServiceContainerTest']);
-Route::get('/serviceprovidertest', [LifeCycleTestController::class, 'showServiceProviderTest']);
+// Route::get('/component-test1', [ComponentTestController::class, 'showComponent1']);
+// Route::get('/component-test2', [ComponentTestController::class, 'showComponent2']);
+// Route::get('/servicecontainertest', [LifeCycleTestController::class, 'showServiceContainerTest']);
+// Route::get('/serviceprovidertest', [LifeCycleTestController::class, 'showServiceProviderTest']);
 
 
 

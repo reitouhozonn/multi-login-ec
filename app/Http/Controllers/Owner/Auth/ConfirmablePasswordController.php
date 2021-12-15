@@ -28,7 +28,7 @@ class ConfirmablePasswordController extends Controller
      */
     public function store(Request $request)
     {
-        if (!Auth::guard('owner')->validate([
+        if (!Auth::guard('owners')->validate([
             'email' => $request->user()->email,
             'password' => $request->password,
         ])) {
