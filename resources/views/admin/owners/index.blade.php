@@ -24,6 +24,7 @@
                         @endforeach
                         --}}
             <div class="container px-5 mx-auto">
+                <x-flash-message status="info" />
                 <div class="flex flex-col text-center w-full">
                     <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">Owners</h1>
                 </div>
