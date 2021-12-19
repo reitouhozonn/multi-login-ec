@@ -8,8 +8,8 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-            <div class="container px-5 mx-auto">
+                <div class="md:p-6 bg-white border-b border-gray-200">
+            <div class="container md:px-5 mx-auto">
                 <x-flash-message status="session('status')" />
                 <div class="flex flex-col text-center w-full">
                     <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">Owners</h1>
@@ -21,26 +21,26 @@
                 <table class="table-auto w-full text-left whitespace-no-wrap">
                     <thead>
                     <tr>
-                        <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">名前</th>
-                        <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">メールアドレス</th>
-                        <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">作成日</th>
-                        <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
-                        <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
+                        <th class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">名前</th>
+                        <th class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">メールアドレス</th>
+                        <th class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">作成日</th>
+                        <th class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
+                        <th class="md:px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br"></th>
                     </tr>
                     </thead>
                     <tbody>
                         @foreach ($owners as $owner)
                     <tr>
-                        <td class="px-4 py-3">{{ $owner->name }}</td>
-                        <td class="px-4 py-3">{{ $owner->email }}</td>
-                        <td class="px-4 py-3">{{ $owner->created_at->diffForHumans() }}</td>
-                        <td class="px-4 py-3">
+                        <td class="md:px-4 py-3">{{ $owner->name }}</td>
+                        <td class="md:px-4 py-3">{{ $owner->email }}</td>
+                        <td class="md:px-4 py-3">{{ $owner->created_at->diffForHumans() }}</td>
+                        <td class="md:px-4 py-3">
                         <button onclick="location.href='{{ route('admin.owners.edit', ['owner' => $owner->id ]) }}'" class="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded">編集</button>
                         </td>
                         <form id="delete_{{$owner->id}}" method="post" action="{{ route('admin.owners.destroy', ['owner' => $owner->id ]) }}">
                         @csrf
                         @method('delete')
-                        <td class="px-4 py-3">
+                        <td class="md:px-4 py-3">
                             <a href="#" data-id="{{ $owner->id }}" onclick="deletePost(this)" class="flex ml-auto text-white bg-red-400 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">削除</a>
                         </td>
                         </form>

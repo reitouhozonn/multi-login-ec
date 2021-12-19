@@ -22,12 +22,13 @@ use App\Http\Controllers\Admin\OwnersController;
 |
 */
 
-Route::get('/', function () {
-    return view('admin.welcome');
-});
+// Route::get('/', function () {
+//     return view('admin.welcome');
+// });
 
 Route::resource('owners', OwnersController::class)
-    ->middleware('auth:admin');
+    ->middleware('auth:admin')
+    ->except(['show']);
 
 Route::prefix('expired-owners')
     ->middleware('auth:admin')
@@ -40,7 +41,9 @@ Route::prefix('expired-owners')
 
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
-})->middleware(['auth:admin'])->name('dashboard');
+})
+    ->middleware(['auth:admin'])
+    ->name('dashboard');
 
 
 Route::get('/register', [RegisteredUserController::class, 'create'])
