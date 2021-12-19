@@ -26,17 +26,21 @@ Route::get('/', function () {
     return view('admin.welcome');
 });
 
-Route::resource('owners', OwnersController::class)->middleware('auth:admin');
+Route::resource('owners', OwnersController::class)
+    ->middleware('auth:admin');
+
+Route::prefix('expired-owners')
+    ->middleware('auth:admin')
+    ->group(function () {
+        Route::get('index', [OwnersController::class, 'expiredOwnerIndex'])
+            ->name('expired-owners.index');
+        Route::post('destroy/{owner}', [OwnersController::class, 'expiredOwnerDestroy'])
+            ->name('expired-owners.destroy');
+    });
 
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->middleware(['auth:admin'])->name('dashboard');
-
-// Route::get('/component-test1', [ComponentTestController::class, 'showComponent1']);
-// Route::get('/component-test2', [ComponentTestController::class, 'showComponent2']);
-// Route::get('/servicecontainertest', [LifeCycleTestController::class, 'showServiceContainerTest']);
-// Route::get('/serviceprovidertest', [LifeCycleTestController::class, 'showServiceProviderTest']);
-
 
 
 Route::get('/register', [RegisteredUserController::class, 'create'])
