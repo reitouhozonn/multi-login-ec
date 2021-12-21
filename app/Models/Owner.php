@@ -42,4 +42,13 @@ class Owner extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
+    public function shop()
+    {
+        return $this->hasOne(Shop::class);
+    }
 }

@@ -17,7 +17,7 @@ class OwnerSeeder extends Seeder
     public function run()
     {
 
-        for ($i = 0; $i < 300; $i++) {
+        for ($i = 0; $i < 100; $i++) {
 
             DB::table('owners')->insert([
                 [
