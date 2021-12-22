@@ -4,7 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * Undocumented class
+ * @property integer $owner_id
+ * @property \Illuminate\Support\Carbon $created_at
+ */
 class Shop extends Model
 {
     use HasFactory;
@@ -24,7 +30,7 @@ class Shop extends Model
 
 
 
-    public function owner()
+    public function owner(): BelongsTo
     {
         return $this->belongsTo(Owner::class);
     }
