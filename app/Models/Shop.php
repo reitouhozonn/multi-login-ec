@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * Undocumented class
  * @property integer $owner_id
  * @property \Illuminate\Support\Carbon $created_at
+ * @property bool $is_selling
  */
 class Shop extends Model
 {
