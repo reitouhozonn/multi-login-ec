@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            店舗情報
         </h2>
     </x-slot>
 
@@ -22,7 +22,7 @@
                         @endif
                             <div class="text-xl my-4">{{ $shop->name }}</div>
 
-                        <x-shop-thumbnail :filename="$shop->filename" />
+                        <x-thumbnail :filename="$shop->filename" type="shops" />
 
                         </div>
                         </div>
