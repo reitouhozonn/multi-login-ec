@@ -235,7 +235,7 @@ return [
         /**
          * package
          */
-        'Image' => Intervention\Image\Facades\Image::class,
+        'interventionImage' => Intervention\Image\Facades\Image::class,
     ],
 
 ];

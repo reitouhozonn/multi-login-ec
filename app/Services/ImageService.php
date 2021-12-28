@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\ImageManagerStatic as Image;
+use Intervention\Image\ImageManagerStatic as InterventionImage;
 
 
 class ImageService
@@ -13,7 +13,7 @@ class ImageService
         $fileName = uniqid(rand() . '_');
         $extension = $imageFile->extension();
         $fileNameToStore = $fileName . '.' . $extension;
-        $resizeImage = Image::make($imageFile)->resize(1920, 1080)->encode();
+        $resizeImage = InterventionImage::make($imageFile)->resize(1920, 1080)->encode();
 
 
         Storage::put('public/' . $folderName . '/' . $fileNameToStore, $resizeImage);
