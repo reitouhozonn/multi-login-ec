@@ -15,7 +15,7 @@
                     <form method="post" action="{{ route('owner.images.update', ['image' => $image->id]) }}">
                         @csrf
                         @method('put')
-                        <div class=" -m-2">
+                        <div class="">
                             <div class="p-2 w-1/2 mx-auto">
                                 <div class="relative">
                                     <label for="title" class="leading-7 text-sm text-gray-600">画像のタイトル</label>
@@ -35,8 +35,25 @@
                             </div>
                         </div>
                     </form>
+                    <form id="delete_{{$image->id}}" method="post" action="{{ route('owner.images.destroy', ['image' => $image->id ]) }}">
+                    @csrf
+                    @method('delete')
+                    <div class="p-2 w-full flex justify-around mt-32">
+                        <a href="#" data-id="{{ $image->id }}" onclick="deletePost(this)" class="flex text-white bg-red-400 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">削除</a>
+                    </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+
+<script>
+    function deletePost(e){
+        'use strict';
+        if(confirm('本当に削除してもいいですか？')){
+        document.getElementById('delete_' + e.dataset.id).submit();
+        }
+    }
+</script>
+
 </x-app-layout>
