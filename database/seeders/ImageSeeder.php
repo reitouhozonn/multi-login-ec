@@ -19,7 +19,7 @@ class ImageSeeder extends Seeder
             DB::table('images')->insert([
                 [
                     'owner_id' => $i,
-                    'filename' => 'public/images/dummy-200x200.png',
+                    'filename' => 'dummy-200x200.png',
                     'title' => 'dummy' . $i,
                     'created_at' => '2021/01/01 11:11:11'
                 ]
