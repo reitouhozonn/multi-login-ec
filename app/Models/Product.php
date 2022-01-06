@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {
@@ -38,5 +39,15 @@ class Product extends Model
     public function imageFirst(): BelongsTo
     {
         return $this->belongsTo(Image::class, 'image1', 'id');
+    }
+
+    /**
+     * Get all of the stock for the Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function stock(): HasMany
+    {
+        return $this->hasMany(Stock::class);
     }
 }

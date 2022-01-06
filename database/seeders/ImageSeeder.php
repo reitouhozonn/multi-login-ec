@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Services\ImageService;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -14,6 +15,8 @@ class ImageSeeder extends Seeder
      */
     public function run()
     {
+        // ImageService::upload('dummy-200x200.png', 'products');
+
         for ($i = 1; $i < 10; $i++) {
 
             DB::table('images')->insert([
