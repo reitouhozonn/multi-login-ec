@@ -60,6 +60,36 @@ class Product extends Model
     }
 
     /**
+     * Get the imageSecond that owns the Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function imageSecond(): BelongsTo
+    {
+        return $this->belongsTo(Image::class, 'image2', 'id');
+    }
+
+    /**
+     * Get the imageThird that owns the Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function imageThird(): BelongsTo
+    {
+        return $this->belongsTo(Image::class, 'image3', 'id');
+    }
+
+    /**
+     * Get the imageFourth that owns the Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function imageFourth(): BelongsTo
+    {
+        return $this->belongsTo(Image::class, 'image4', 'id');
+    }
+
+    /**
      * Get all of the stock for the Product
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
