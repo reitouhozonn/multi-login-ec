@@ -17,7 +17,7 @@ class ImageSeeder extends Seeder
     {
         // ImageService::upload('dummy-200x200.png', 'products');
 
-        for ($i = 1; $i < 5; $i++) {
+        for ($i = 1; $i < 6; $i++) {
 
             DB::table('images')->insert([
                 [
