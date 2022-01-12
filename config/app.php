@@ -1,5 +1,6 @@
 <?php
 
+
 return [
 
     /*
@@ -236,6 +237,7 @@ return [
          * package
          */
         'interventionImage' => Intervention\Image\Facades\Image::class,
+        'Constants' => App\Constants\Common::class,
     ],
 
 ];
