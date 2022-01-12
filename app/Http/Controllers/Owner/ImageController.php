@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Owner;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UploadImageRequest;
 use App\Models\Image;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Services\ImageService;
@@ -21,7 +22,7 @@ class ImageController extends Controller
 
             $id = $request->route()->parameter('image');
             if (!is_null($id)) {
-                $imageOwnerId = Image::findOrfail($id)->owner->id;
+                $imageOwnerId = Image::findOrFail($id)->owner->id;
                 $imageId = (int)$imageOwnerId;
                 if ($imageId !== Auth::id()) {
                     abort(404);
@@ -135,7 +136,35 @@ class ImageController extends Controller
     public function destroy($id)
     {
         $image = Image::findOrFail($id);
-        $filePath = 'public/prodacts/' . $image->filename;
+
+        $imageInProducts = Product::where('image1', $image->id)
+            ->orWhere('image2', $image->id)
+            ->orWhere('image3', $image->id)
+            ->orWhere('image4', $image->id)
+            ->get();
+
+        if ($imageInProducts) {
+            $imageInProducts->each(function ($product) use ($image) {
+                if ($product->image1 === $image->id) {
+                    $product->image1 = null;
+                    $product->save();
+                }
+                if ($product->image2 === $image->id) {
+                    $product->image2 = null;
+                    $product->save();
+                }
+                if ($product->image3 === $image->id) {
+                    $product->image3 = null;
+                    $product->save();
+                }
+                if ($product->image4 === $image->id) {
+                    $product->image4 = null;
+                    $product->save();
+                }
+            });
+        }
+
+        $filePath = 'public/products/' . $image->filename;
 
         if (Storage::exists($filePath)) {
             Storage::delete($filePath);
