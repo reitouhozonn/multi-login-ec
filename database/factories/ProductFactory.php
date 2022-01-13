@@ -16,7 +16,7 @@ class ProductFactory extends Factory
         return [
             'name' => $this->faker->name,
             'information' => $this->faker->realText(100),
-            'price' => $this->faker->numberBetween(1, 1000),
+            'price' => $this->faker->numberBetween(1, 100000),
             'is_selling' => $this->faker->numberBetween(0, 1),
             'sort_order' => $this->faker->randomNumber(1, 10),
             'shop_id' => $this->faker->numberBetween(1, 2),
