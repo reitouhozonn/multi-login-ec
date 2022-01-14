@@ -17,12 +17,12 @@ class ImageSeeder extends Seeder
     {
         // ImageService::upload('dummy-200x200.png', 'products');
 
-        for ($i = 1; $i < 6; $i++) {
+        for ($i = 1; $i < 7; $i++) {
 
             DB::table('images')->insert([
                 [
                     'owner_id' => $i,
-                    'filename' => 'dummy-200x200.png',
+                    'filename' => 'sample_' . $i . '.jpg',
                     'title' => 'dummy' . $i,
                     'created_at' => '2021/01/01 11:11:11'
                 ]

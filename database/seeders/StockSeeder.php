@@ -14,7 +14,7 @@ class StockSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 1; $i < 5; $i++) {
+        for ($i = 1; $i < 6; $i++) {
 
             DB::table('t_stocks')->insert([
                 [

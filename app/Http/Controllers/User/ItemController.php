@@ -82,7 +82,6 @@ class ItemController extends Controller
      */
     public function create()
     {
-        // $p = new Product();
         // $p->sum('')
     }
 
