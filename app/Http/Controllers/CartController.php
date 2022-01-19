@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
+    /**
+     * index
+     *
+     * @return void
+     */
     public function index()
     {
         $user = User::findOrFail(Auth::id());
@@ -24,7 +29,13 @@ class CartController extends Controller
             compact('products', 'totalPrice')
         );
     }
-
+    /**
+     * add
+     *
+     *
+     * @param Request $request
+     * @return void
+     */
     public function add(Request $request)
     {
         $itemInCart = Cart::where('product_id', $request->product_id)
@@ -40,6 +51,21 @@ class CartController extends Controller
                 'quantity' => $request->quantity
             ]);
         }
+
+        return redirect()->route('user.cart.index');
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param [type] $id
+     * @return void
+     */
+    public function delete($id)
+    {
+        Cart::where('product_id', $id)
+            ->where('user_id', Auth::id())
+            ->delete();
 
         return redirect()->route('user.cart.index');
     }
