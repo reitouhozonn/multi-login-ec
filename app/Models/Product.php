@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\DB;
 
+
 class Product extends Model
 {
     use HasFactory;
@@ -148,5 +149,24 @@ class Product extends Model
                 'secondary_categories.name as category',
                 'image1.filename as filename',
             );
+    }
+
+    public function scopeSortOrder($query, $sortOrder)
+    {
+        if ($sortOrder === null || $sortOrder === \Constants::SORT_ORDER['recommend']) {
+            return $query->orderBy('sort_order', 'asc');
+        }
+        if ($sortOrder === \Constants::SORT_ORDER['higherPrice']) {
+            return $query->orderBy('price', 'desc');
+        }
+        if ($sortOrder === \Constants::SORT_ORDER['lowerPrice']) {
+            return $query->orderBy('price', 'asc');
+        }
+        if ($sortOrder === \Constants::SORT_ORDER['later']) {
+            return $query->orderBy('products.created_at', 'desc');
+        }
+        if ($sortOrder === \Constants::SORT_ORDER['older']) {
+            return $query->orderBy('products.created_at', 'asc');
+        }
     }
 }
