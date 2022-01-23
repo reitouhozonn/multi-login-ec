@@ -150,7 +150,13 @@ class Product extends Model
                 'image1.filename as filename',
             );
     }
-
+    /**
+     * Undocumented function
+     *
+     * @param [type] $query
+     * @param [type] $sortOrder
+     * @return void
+     */
     public function scopeSortOrder($query, $sortOrder)
     {
         if ($sortOrder === null || $sortOrder === \Constants::SORT_ORDER['recommend']) {
