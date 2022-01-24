@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\PrimaryCategory;
 use App\Models\Product;
 use App\Models\Stock;
 use Illuminate\Http\Request;
@@ -35,13 +36,18 @@ class ItemController extends Controller
      */
     public function index(Request $request)
     {
+        // dd($request);
         $products = Product::availableItems()
+            ->selectCategory($request->category ?? '0')
             ->sortOrder($request->sort)
             ->paginate($request->pagination ?? '20');
 
+        $categories = PrimaryCategory::with('secondary')
+            ->get();
+
         return view(
             'user.index',
-            compact('products')
+            compact('products', 'categories')
         );
     }
 

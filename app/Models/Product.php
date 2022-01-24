@@ -175,4 +175,19 @@ class Product extends Model
             return $query->orderBy('products.created_at', 'asc');
         }
     }
+    /**
+     * Undocumented function
+     *
+     * @param [type] $query
+     * @param [type] $categoryId
+     * @return void
+     */
+    public function scopeSelectCategory($query, $categoryId)
+    {
+        if ($categoryId !== '0') {
+            return $query->where('secondary_category_id', $categoryId);
+        } else {
+            return;
+        }
+    }
 }
