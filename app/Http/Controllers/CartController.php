@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendOrderedMail;
 use App\Jobs\SendThanksMail;
 use App\Models\Cart;
 use App\Models\Stock;
@@ -75,15 +76,13 @@ class CartController extends Controller
 
     public function checkout()
     {
-        ////
-        $items =  Cart::where('user_id', Auth::id())->get();
-        $products = CartService::getItemInCart($items);
-        $user = User::findOrFail(Auth::id());
+        // $items =  Cart::where('user_id', Auth::id())->get();
+        // $products = CartService::getItemInCart($items);
+        // $user = User::findOrFail(Auth::id());
 
-
-        SendThanksMail::dispatch($products, $user);
-        dd('test_mail');
-        ////
+        // foreach ($products as $product) {
+        //     SendOrderedMail::dispatch($product, $user);
+        // }
 
         $user = User::findOrFail(Auth::id());
         $products = $user->products;
@@ -132,13 +131,33 @@ class CartController extends Controller
         );
     }
 
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
     public function success()
     {
+        $items =  Cart::where('user_id', Auth::id())->get();
+        $products = CartService::getItemInCart($items);
+        $user = User::findOrFail(Auth::id());
+
+        SendThanksMail::dispatch($products, $user);
+
+        foreach ($products as $product) {
+            SendOrderedMail::dispatch($product, $user);
+        }
+
         Cart::where('user_id', Auth::id())->delete();
 
         return redirect()->route('user.items.index');
     }
 
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
     public function cancel()
     {
         $user = User::findOrFail(Auth::id());

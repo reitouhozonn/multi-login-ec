@@ -3,7 +3,9 @@
 namespace App\Services;
 
 use App\Models\Cart;
+use App\Models\Owner;
 use App\Models\Product;
+use DB;
 
 class CartService
 {
@@ -12,11 +14,12 @@ class CartService
         $products = [];
 
         foreach ($items as $item) {
-            $p = Product::findOrFail($item->product_id);
-            $owner = $p->shop->owner->select('name', 'email')->first()->toArray();
-            $values = array_values($owner);
-            $keys = ['ownerName', 'email'];
-            $ownerInfo = array_combine($keys, $values);
+            $p = DB::table('products')->where('id', $item->product_id)->value('shop_id');
+            $s = DB::table('shops')->where('id', $p)->value('owner_id');
+            $ownerName = DB::table('owners')->where('id', $s)->value('name');
+            $email = DB::table('owners')->where('id', $s)->value('email');
+            $ownerInfo = compact('ownerName', 'email');
+
 
             $product = Product::where('id', $item->product_id)
                 ->select('id', 'name', 'price')->get()->toArray();
