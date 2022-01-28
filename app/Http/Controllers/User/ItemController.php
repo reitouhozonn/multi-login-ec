@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Jobs\SendThanksMail;
 use App\Models\PrimaryCategory;
 use App\Models\Product;
 use App\Models\Stock;
@@ -37,8 +36,6 @@ class ItemController extends Controller
      */
     public function index(Request $request)
     {
-        // dd($request);
-        SendThanksMail::dispatch();
 
         $products = Product::availableItems()
             ->selectCategory($request->category ?? '0')

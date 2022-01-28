@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendThanksMail;
 use App\Models\Cart;
 use App\Models\Stock;
 use App\Models\User;
@@ -77,6 +78,11 @@ class CartController extends Controller
         ////
         $items =  Cart::where('user_id', Auth::id())->get();
         $products = CartService::getItemInCart($items);
+        $user = User::findOrFail(Auth::id());
+
+
+        SendThanksMail::dispatch($products, $user);
+        dd('test_mail');
         ////
 
         $user = User::findOrFail(Auth::id());
