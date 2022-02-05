@@ -26,6 +26,7 @@ Route::middleware('auth:users')
             ->name('items.index');
         Route::get('show/{item}', [ItemController::class, 'show'])
             ->name('items.show');
+        Route::get('sql', [ItemController::class, 'sql'])->name('items.sql');
     });
 
 Route::prefix('cart')->middleware('auth:users')

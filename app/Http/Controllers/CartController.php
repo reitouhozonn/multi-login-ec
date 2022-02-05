@@ -76,14 +76,6 @@ class CartController extends Controller
 
     public function checkout()
     {
-        // $items =  Cart::where('user_id', Auth::id())->get();
-        // $products = CartService::getItemInCart($items);
-        // $user = User::findOrFail(Auth::id());
-
-        // foreach ($products as $product) {
-        //     SendOrderedMail::dispatch($product, $user);
-        // }
-
         $user = User::findOrFail(Auth::id());
         $products = $user->products;
 

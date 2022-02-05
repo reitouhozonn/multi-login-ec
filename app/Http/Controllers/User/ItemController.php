@@ -100,9 +100,24 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function sql()
     {
-        //
+        $item = 3;
+
+        // $p = DB::table('products')->where('id', $item)->value('shop_id');
+        // $s = DB::table('shops')->where('id', $p)->value('owner_id');
+        // $o = DB::table('owners')->where('id', $s)->value('name');
+
+        $o = DB::table('products')
+            ->join('shops', 'products.id', '=', 'shops.id')
+            ->join('owners', 'owners.id', '=', 'shops.owner_id')
+            ->where('products.id', $item)
+            ->select('owners.name')
+            ->addSelect('owners.email')
+            ->get();
+
+        // dd($o);
+        return $o;
     }
 
     /**

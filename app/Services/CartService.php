@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\Cart;
-use App\Models\Owner;
 use App\Models\Product;
 use DB;
 
@@ -19,7 +18,6 @@ class CartService
             $ownerName = DB::table('owners')->where('id', $s)->value('name');
             $email = DB::table('owners')->where('id', $s)->value('email');
             $ownerInfo = compact('ownerName', 'email');
-
 
             $product = Product::where('id', $item->product_id)
                 ->select('id', 'name', 'price')->get()->toArray();
