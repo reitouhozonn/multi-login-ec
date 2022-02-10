@@ -113,17 +113,25 @@ class ItemController extends Controller
 
 
         $o = DB::table('products')
+            ->select('owners.name as ownerName')
+            ->addSelect('owners.email')
             ->join('shops', 'products.id', '=', 'shops.id')
             ->join('owners', 'owners.id', '=', 'shops.owner_id')
             ->where('products.id', $item)
-            ->select('owners.name as ownerName')
+            ->toSql();
+
+        $o2 = Product::select('owners.name as ownerName')
             ->addSelect('owners.email')
+            ->join('shops', 'products.id', '=', 'shops.id')
+            ->join('owners', 'owners.id', '=', 'shops.owner_id')
+            ->where('products.id', $item)
             ->get();
+
 
         $time_end = hrtime(true);
         $t = ($time_end - $time_start) * 1e-6 . 'ms';
         // dd($o);
-        return compact('o', 't');
+        return compact('o', 'o2', 't');
     }
 
     /**
