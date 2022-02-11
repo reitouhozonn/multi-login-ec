@@ -100,9 +100,38 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function sql()
     {
-        //
+
+        $time_start = hrtime(true);
+
+        $item = 3;
+
+        // $p = DB::table('products')->where('id', $item)->value('shop_id');
+        // $s = DB::table('shops')->where('id', $p)->value('owner_id');
+        // $o = DB::table('owners')->where('id', $s)->value('name');
+
+
+        $o = DB::table('products')
+            ->select('owners.name as ownerName')
+            ->addSelect('owners.email')
+            ->join('shops', 'products.id', '=', 'shops.id')
+            ->join('owners', 'owners.id', '=', 'shops.owner_id')
+            ->where('products.id', $item)
+            ->toSql();
+
+        $o2 = Product::select('owners.name as ownerName')
+            ->addSelect('owners.email')
+            ->join('shops', 'products.id', '=', 'shops.id')
+            ->join('owners', 'owners.id', '=', 'shops.owner_id')
+            ->where('products.id', $item)
+            ->get();
+
+
+        $time_end = hrtime(true);
+        $t = ($time_end - $time_start) * 1e-6 . 'ms';
+        // dd($o);
+        return compact('o', 'o2', 't');
     }
 
     /**
